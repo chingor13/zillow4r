@@ -1,22 +1,10 @@
 module Zillow4r
   module Api
     class Zestimate < Zillow4r::Api::Base
-      # intermediate points
-      data_point :zestimate_data, "response zestimate", :data
-      data_point :address_data, "response address", :data
-
-      int_point :zpid, "response zpid", :data
-      text_point :homedetails_url, "response links homedetails", :data
-      text_point :graphsanddata_url, "response links graphsanddata", :data
-      text_point :mapthishome_url, "response links mapthishome", :data
-      text_point :myestimator_url, "response links myestimator", :data
-      text_point :comparables_url, "response links comparables", :data
-
-      # real accessors
-      int_point :amount, "amount", :zestimate_data
-      data_point :currency, "amount", :zestimate_data:, lambda{|e| e.attribute("currency").value}
-      text_point :last_updated, "last-updated", :zestimate_data
-      int_point :percentile, "percentile", :zestimate_data
+      int_point    :zpid, "response zpid", :data
+      object_point :zestimate, "response zestimate", :data, Zillow4r::Zestimate
+      object_point :address, "response address", :data, Zillow4r::Address
+      object_point :links, "response links", :data, Zillow4r::Links
 
       def self.path
         "/webservice/GetZestimate.htm"

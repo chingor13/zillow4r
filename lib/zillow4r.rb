@@ -22,7 +22,13 @@ module Zillow4r
 
     def fetch(type, params = {})
       klass = get_class(type)
-      path = klass.build_path(params)
+      path = begin
+        p = ["zws-id=#{Zillow4r.zws_id}"]
+        params.each do |key,value|
+          p << "#{key}=#{URI.escape(value.to_s)}"
+        end
+        "#{path}?#{p.join('&')}"
+      end
       url = "http://" + WEB_API_HOST + path
       klass.new(open(url).read)
     end
@@ -37,5 +43,12 @@ module Zillow4r
 
 end
 
+require 'zillow4r/xml_search_helper.rb'
+require 'zillow4r/base.rb'
+require 'zillow4r/address.rb'
+require 'zillow4r/links.rb'
+require 'zillow4r/zestimate.rb'
+require 'zillow4r/region.rb'
+require 'zillow4r/property.rb'
 require 'zillow4r/api.rb'
 require 'zillow4r/responses.rb'
