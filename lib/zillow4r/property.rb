@@ -14,5 +14,6 @@ module Zillow4r
 
     object_point    :address, "address", :data, Zillow4r::Address
     object_point    :zestimate, "zestimate", :data, Zillow4r::Zestimate
+    object_point    :links, "links", :data, Zillow4r::Links
   end
 end
