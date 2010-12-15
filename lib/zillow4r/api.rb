@@ -1,16 +1,25 @@
 module Zillow4r
   module Api
+    class Base < Zillow4r::Base
+      def self.path
+        raise "Need to set path for child class"
+      end
+
+      int_point "response_code", "message code", "data"
+      text_point "response_message", "message text", "data"
+
+      def data_error?
+        response_code.nil? || response_code > 500
+      end
+
+      def error?
+        response_code.nil? || response_code > 0
+      end
+    end
   end
 end
 
-require 'zillow4r/api/base.rb'
-require 'zillow4r/api/demographics.rb'
-require 'zillow4r/api/region_chart.rb'
-require 'zillow4r/api/zestimate.rb'
-require 'zillow4r/api/chart.rb'
-require 'zillow4r/api/comps.rb'
-require 'zillow4r/api/search_results.rb'
-require 'zillow4r/api/deep_comps.rb'
-require 'zillow4r/api/deep_search_results.rb'
-require 'zillow4r/api/updated_property_details.rb'
-require 'zillow4r/api/region_children.rb'
+Dir.glob(File.dirname(__FILE__) + "/api/*.rb").each do |file|
+  require file
+end
+

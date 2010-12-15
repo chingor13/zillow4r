@@ -1,7 +1,7 @@
-Bundler.setup
-require 'net/http'
+require 'rubygems'
 require 'pp'
 require 'open-uri'
+require 'nokogiri'
 module Zillow4r
 
   HTTP_USER_AGENT = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.1) Gecko/20060111 Firefox/1.5.0.1"
@@ -22,15 +22,17 @@ module Zillow4r
 
     def fetch(type, params = {})
       klass = get_class(type)
-      path = begin
-        p = ["zws-id=#{Zillow4r.zws_id}"]
-        params.each do |key,value|
-          p << "#{key}=#{URI.escape(value.to_s)}"
-        end
-        "#{path}?#{p.join('&')}"
-      end
+      path = build_path(klass, params)
       url = "http://" + WEB_API_HOST + path
       klass.new(open(url).read)
+    end
+
+    def build_path(klass, params)
+      p = ["zws-id=#{Zillow4r.zws_id}"]
+      params.each do |key,value|
+        p << "#{key}=#{URI.escape(value.to_s)}"
+      end
+      "#{klass.path}?#{p.join('&')}"
     end
 
     private
@@ -43,15 +45,5 @@ module Zillow4r
 
 end
 
-require 'zillow4r/xml_search_helper.rb'
-require 'zillow4r/base.rb'
-require 'zillow4r/address.rb'
-require 'zillow4r/links.rb'
-require 'zillow4r/images.rb'
-require 'zillow4r/posting.rb'
-require 'zillow4r/zestimate.rb'
-require 'zillow4r/region.rb'
-require 'zillow4r/property.rb'
-require 'zillow4r/comparable_property.rb'
+require 'zillow4r/models.rb'
 require 'zillow4r/api.rb'
-require 'zillow4r/responses.rb'
