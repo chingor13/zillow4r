@@ -11,6 +11,8 @@ module Zillow4r
           return nil if data.nil?
 
           value = find_attribute(definition, data)
+          return nil if value.nil? || value.empty?
+
           if post_value
             if post_value.respond_to?(:call)
               value = post_value.call(value)
@@ -36,7 +38,7 @@ module Zillow4r
       end
 
       def attribute_point(method_name, definition, source, attribute_name)
-        data_point method_name, definition, source, lambda{|e| e.attribute(attribute_name).value}
+        data_point method_name, definition, source, lambda{|e| attr = e.attribute(attribute_name).value}
       end
 
       def object_point(method_name, definition, source, klass)
@@ -53,7 +55,7 @@ module Zillow4r
     def find_attribute(definition, data)
       return nil if data.nil?
       return data if definition.empty?
-
+      definition = definition.dup
       attribute = definition.shift
       if attribute.is_a?(Hash)
         new_data = data.children.detect{|e| attribute.all?{|k,v| child = e.children.detect{|c| c.name == k}; child.inner_text.strip == v}}
