@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jeff Ching"]
-  s.date = %q{2010-12-15}
+  s.date = %q{2010-12-16}
   s.description = %q{Simple ruby interface for the Zillow API. See http://www.zillow.com/howto/api/APIOverview.htm}
   s.email = %q{ching.jeff@gmail.com}
   s.extra_rdoc_files = [
