@@ -19,6 +19,8 @@ FIXTURE_PATH = File.expand_path(File.join(File.dirname(__FILE__), 'fixtures'))
 
 class ZillowTest < Test::Unit::TestCase
 
+  def default_test; end;
+
   protected
 
   def assert_equal_url(url1, url2)
