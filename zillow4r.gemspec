@@ -55,7 +55,8 @@ Gem::Specification.new do |s|
     "test/unit/region_children_test.rb",
     "test/unit/search_results_test.rb",
     "test/unit/updated_property_details_test.rb",
-    "test/unit/zestimate_test.rb"
+    "test/unit/zestimate_test.rb",
+    "zillow4r.gemspec"
   ]
   s.homepage = %q{http://github.com/chingor13/zillow4r}
   s.licenses = ["MIT"]
