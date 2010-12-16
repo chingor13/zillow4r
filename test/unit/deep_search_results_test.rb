@@ -2,6 +2,11 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'test_helper.rb
 
 class DeepSearchResultsTest < ZillowTest
 
+  def test_webservice_url
+    path = Zillow4r.build_path(Zillow4r::Api::DeepSearchResults, :address => "2114 Bigelow Ave", :citystatezip => "Seattle, WA")
+    assert_equal("/webservice/GetDeepSearchResults.htm?zws-id=TEST_ZWS_ID&address=2114+Bigelow+Ave&citystatezip=Seattle%2C+WA", path)
+  end
+
   def test_parsing
     # mock response
     mock_http_response("deep_search_results.xml")

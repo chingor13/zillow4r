@@ -2,6 +2,11 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'test_helper.rb
 
 class RegionChartTest < ZillowTest
 
+  def test_webservice_url
+    path = Zillow4r.build_path(Zillow4r::Api::RegionChart, "unit-type" => "percent", :city => "seattle", :state => "WA", :width => 300, :height => 150)
+    assert_equal("/webservice/GetRegionChart.htm?zws-id=TEST_ZWS_ID&unit-type=percent&city=seattle&state=WA&width=300&height=150", path)
+  end
+
   def test_parsing
     # mock response
     mock_http_response("region_chart.xml")

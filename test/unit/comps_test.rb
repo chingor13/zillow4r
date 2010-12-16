@@ -2,6 +2,11 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'test_helper.rb
 
 class CompsTest < ZillowTest
 
+  def test_webservice_url
+    path = Zillow4r.build_path(Zillow4r::Api::Comps, :zpid => 48749425, :count => 5)
+    assert_equal("/webservice/GetComps.htm?zws-id=TEST_ZWS_ID&zpid=48749425&count=5", path)
+  end
+
   def test_parsing
     # mock response
     mock_http_response("comps.xml")

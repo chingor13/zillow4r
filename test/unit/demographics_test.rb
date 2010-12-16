@@ -2,8 +2,8 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'test_helper.rb
 
 class DemographicsTest < ZillowTest
 
-  def no_test_webservice_url
-    path = Zillow4r::Api::Demographics.build_path(:city => "Seattle", :state => "WA")
+  def test_webservice_url
+    path = Zillow4r.build_path(Zillow4r::Api::Demographics, :city => "Seattle", :state => "WA")
     assert_equal("/webservice/GetDemographics.htm?zws-id=TEST_ZWS_ID&city=Seattle&state=WA", path)
   end
 

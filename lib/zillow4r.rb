@@ -1,7 +1,7 @@
 require 'rubygems'
-require 'pp'
 require 'open-uri'
 require 'nokogiri'
+require 'cgi'
 module Zillow4r
 
   HTTP_USER_AGENT = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.1) Gecko/20060111 Firefox/1.5.0.1"
@@ -30,7 +30,7 @@ module Zillow4r
     def build_path(klass, params)
       p = ["zws-id=#{Zillow4r.zws_id}"]
       params.each do |key,value|
-        p << "#{key}=#{URI.escape(value.to_s)}"
+        p << "#{key}=#{CGI.escape(value.to_s)}"
       end
       "#{klass.path}?#{p.join('&')}"
     end

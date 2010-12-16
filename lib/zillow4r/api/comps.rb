@@ -5,7 +5,7 @@ module Zillow4r
       array_point :comparables, "response/properties/comparables", :data, Zillow4r::ComparableProperty
 
       def self.path
-        "/webservice/GetChart.htm"
+        "/webservice/GetComps.htm"
       end
 
     end

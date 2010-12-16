@@ -2,6 +2,11 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'test_helper.rb
 
 class RegionChildrenTest < ZillowTest
 
+  def test_webservice_url
+    path = Zillow4r.build_path(Zillow4r::Api::RegionChildren, :city => "seattle", :state => "WA", :childtype => "neighborhood")
+    assert_equal("/webservice/GetRegionChildren.htm?zws-id=TEST_ZWS_ID&city=seattle&state=WA&childtype=neighborhood", path)
+  end
+
   def test_parsing
     # mock response
     mock_http_response("region_children.xml")
