@@ -21,6 +21,17 @@ class ZillowTest < Test::Unit::TestCase
 
   protected
 
+  def assert_equal_url(url1, url2)
+    uri1 = URI.parse(url1)
+    uri2 = URI.parse(url2)
+    assert_equal(uri1.host, uri2.host)
+    assert_equal(uri1.port, uri2.port)
+    assert_equal(uri1.path, uri2.path)
+    query_params1 = uri1.query.split("&").sort
+    query_params2 = uri2.query.split("&").sort
+    assert_equal(query_params1, query_params2)
+  end
+
   def mock_http_response(filename)
     OpenURI.stubs(:open_uri).returns(File.open(FIXTURE_PATH + "/#{filename}"))
   end

@@ -4,7 +4,7 @@ class DeepCompsTest < ZillowTest
 
   def test_webservice_url
     path = Zillow4r.build_path(Zillow4r::Api::DeepComps, :zpid => 48749425, :count => 5)
-    assert_equal("/webservice/GetDeepComps.htm?zws-id=TEST_ZWS_ID&zpid=48749425&count=5", path)
+    assert_equal_url("/webservice/GetDeepComps.htm?zws-id=TEST_ZWS_ID&zpid=48749425&count=5", path)
   end
 
   def test_parsing

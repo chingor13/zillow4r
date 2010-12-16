@@ -4,10 +4,7 @@ class DemographicsTest < ZillowTest
 
   def test_webservice_url
     path = Zillow4r.build_path(Zillow4r::Api::Demographics, :city => "Seattle", :state => "WA")
-
-    u1 = URI.parse(path)
-    u2 = URI.parse("/webservice/GetDemographics.htm?zws-id=TEST_ZWS_ID&city=Seattle&state=WA")
-    assert_equal(u2, u1)
+    assert_equal_url("/webservice/GetDemographics.htm?zws-id=TEST_ZWS_ID&city=Seattle&state=WA", path)
   end
 
   def test_parsing

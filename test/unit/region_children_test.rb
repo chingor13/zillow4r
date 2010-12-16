@@ -4,10 +4,7 @@ class RegionChildrenTest < ZillowTest
 
   def test_webservice_url
     path = Zillow4r.build_path(Zillow4r::Api::RegionChildren, :city => "seattle", :state => "WA", :childtype => "neighborhood")
-
-    u1 = URI.parse(path)
-    u2 = URI.parse("/webservice/GetRegionChildren.htm?zws-id=TEST_ZWS_ID&city=seattle&state=WA&childtype=neighborhood")
-    assert_equal(u2, u1)
+    assert_equal_url("/webservice/GetRegionChildren.htm?zws-id=TEST_ZWS_ID&city=seattle&state=WA&childtype=neighborhood", path)
   end
 
   def test_parsing
