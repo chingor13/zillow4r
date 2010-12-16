@@ -7,6 +7,7 @@ require 'test/unit'
 Bundler.setup
 Bundler.require(:default)
 Bundler.require(:development)
+require 'uri'
 
 # require the files
 require 'zillow4r'

@@ -4,7 +4,10 @@ class ChartTest < ZillowTest
 
   def test_webservice_url
     path = Zillow4r.build_path(Zillow4r::Api::Chart, "unit-type" => "percent", "zpid" => 48749425, "width" => 300, "height" => 150)
-    assert_equal("/webservice/GetChart.htm?zws-id=TEST_ZWS_ID&unit-type=percent&zpid=48749425&width=300&height=150", path)
+
+    u1 = URI.parse(path)
+    u2 = URI.parse("/webservice/GetChart.htm?zws-id=TEST_ZWS_ID&unit-type=percent&zpid=48749425&width=300&height=150")
+    assert_equal(u2, u1)
   end
 
   def test_parsing
