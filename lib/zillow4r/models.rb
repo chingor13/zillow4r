@@ -41,6 +41,10 @@ module Zillow4r
         data_point method_name, definition, source, lambda{|e| attr = e.attribute(attribute_name.to_s).value}
       end
 
+      def array_point(method_name, definition, source, klass)
+        data_point method_name, definition, source, lambda{|e| e.children.map{|c| klass.new(c)}}
+      end
+
       def object_point(method_name, definition, source, klass)
         data_point method_name, definition, source, lambda{|e| klass.new(e)}
       end

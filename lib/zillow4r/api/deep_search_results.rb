@@ -1,11 +1,7 @@
 module Zillow4r
   module Api
     class DeepSearchResults < Zillow4r::Api::Base
-      data_point :results_data_node, "response results", :data
-
-      def results
-        @results ||= results_data_node.children.map{|e| Zillow4r::Property.new(e)}
-      end
+      array_point :results, "response/results", :data, Zillow4r::Property
 
       def self.path
         "/webservice/GetDeepSearchResults.htm"
